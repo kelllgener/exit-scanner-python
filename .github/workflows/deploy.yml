@@ -24,12 +24,13 @@ jobs:
         pip install -r requirements.txt  # Ensure you have a requirements.txt file
 
     - name: Set up Firebase credentials
-      run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > service-account-key-python.json
+      run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > firebase-credentials.json
 
     - name: Run the Python script
       env:
-        GOOGLE_APPLICATION_CREDENTIALS: service-account-key-python.json  # Set environment variable
+        GOOGLE_APPLICATION_CREDENTIALS: firebase-credentials.json  # Set environment variable
+        exit-scanner: ${{ secrets.FIREBASE_CREDENTIALS }}  # Added environment variable
       run: python app.py  # Change this to your actual script name
 
     - name: Clean up
-      run: rm service-account-key-python.json
+      run: rm firebase-credentials.json
