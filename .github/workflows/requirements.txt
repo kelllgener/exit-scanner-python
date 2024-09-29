@@ -1,0 +1,5 @@
+opencv-python
+numpy
+aiohttp
+pycryptodome
+firebase-admin

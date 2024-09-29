@@ -1,0 +1,33 @@
+name: Deploy Python Code
+
+on:
+  push:
+    branches:
+      - main  # Change this to your desired branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # Change to your desired Python version
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt  # Ensure you have a requirements.txt file
+
+    - name: Set up Firebase credentials
+      run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > service-account-key-python.json
+
+    - name: Run the Python script
+      run: python app.py  # Change this to your actual script name
+
+    - name: Clean up
+      run: rm service-account-key-python.json
