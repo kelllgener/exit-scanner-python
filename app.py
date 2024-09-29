@@ -1,3 +1,5 @@
+import os
+import json
 import cv2
 import numpy as np
 import aiohttp
@@ -12,8 +14,13 @@ from firebase_admin import credentials, firestore
 ESP32_IP = 'todamoonexit.local'
 
 # Initialize Firebase Admin SDK
-cred = credentials.Certificate("service-account-key-python.json")
-firebase_admin.initialize_app(cred)
+firebase_credentials = os.getenv('FIREBASE_CREDENTIALS')
+
+if firebase_credentials:
+    cred = credentials.Certificate(json.loads(firebase_credentials))
+    firebase_admin.initialize_app(cred)
+else:
+    raise ValueError("Firebase credentials not found in environment variables.")
 
 db = firestore.client()
 
