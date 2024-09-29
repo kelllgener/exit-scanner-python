@@ -9,7 +9,7 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 # Define the IP address of your ESP32
-ESP32_IP = 'todamoonexit.local'
+ESP32_IP = '192.168.18.18'
 
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate("firebase-credentials.json")
