@@ -24,7 +24,8 @@ jobs:
         pip install -r requirements.txt  # Ensure you have a requirements.txt file
 
     - name: Set up Firebase credentials
-      run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > firebase-credentials.json
+      run: |
+        echo '${{ secrets.FIREBASE_CREDENTIALS }}' > firebase-credentials.json
 
     - name: Run the Python script
       env:
