@@ -27,6 +27,8 @@ jobs:
       run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > service-account-key-python.json
 
     - name: Run the Python script
+      env:
+        GOOGLE_APPLICATION_CREDENTIALS: service-account-key-python.json  # Set environment variable
       run: python app.py  # Change this to your actual script name
 
     - name: Clean up
